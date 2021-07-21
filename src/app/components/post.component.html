@@ -1,0 +1,49 @@
+
+<div class= "container" style="border: 2px solid darkslateblue">
+    <div class="row"> 
+        <h4 style = "text-align: center; font-style: italic;">Share Something Today!</h4> 
+    </div>
+    <div class="row">  
+        <div class="col-9" *ngIf="!webcamImage">
+            <img src = "../../assets/img_placeholder.jpg" class="img-fluid" style="float: right; max-width:60%">
+        </div>
+        <div class="col-9" *ngIf="webcamImage" style="text-align: right">
+            <img [src]="webcamImage.imageAsDataUrl" class="img-fluid" style="max-width:60%" >
+        </div>
+        <div class="col-3 float-left my-auto">
+            <!--<button class="btn btn-info" style="width:110px; background-color:purple; border: purple; color:white;">
+                Upload <i class="fas fa-upload"></i></button><br><br>-->
+            <button class="btn btn-danger" [routerLink]="['/capture']">
+                Capture  <i class="fas fa-camera"></i></button>
+
+        </div>
+        
+    </div>
+   
+    <form [formGroup]="form" (ngSubmit)="processForm()"> 
+        <div class="form-group mb-3">
+            <label for="title" class="form-label" style="font-weight: bold; font-size: 120%;">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Title" formControlName="post_title">
+        </div>
+        <div class="form-group mb-3">
+            <label for="comments" class="form-label" style="font-weight: bold; font-size: 120%;">Comments</label>
+            <textarea class="form-control" id="comments" rows="3" placeholder="Your thoughts" formControlName="comments"></textarea>
+        </div>
+        <div class="mx-2 row">
+            <div class="col text-center">
+                <button class="btn btn-primary" type="submit" style="width:100px;" 
+                    [disabled]="form.invalid ? true : !webcamImage">Post <i class="fas fa-share-square"></i></button>
+            </div>
+            <div class="col text-center">
+                <button class="btn btn-warning" type="button" style="width:100px;" 
+                    (click)="clearFormAndImage()">Clear <i class="fas fa-trash-alt"></i></button>
+            </div>
+            <div class="col text-center">
+                <button class="btn btn-dark" type="button" style="width:100px;" 
+                    (click)="cancelPost()">Cancel <i class="fas fa-window-close"></i></button>
+            </div>
+        </div>
+     
+    </form>
+    <br>
+</div>

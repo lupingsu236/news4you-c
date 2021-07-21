@@ -1,0 +1,36 @@
+<div class = "row" style="text-align: right; margin-right:110px">
+    <div class="col">
+        <button *ngIf="!username" class="btn btn-warning" [routerLink]="['/login']" style="margin-right:10px;">
+        Login  <i class="fas fa-sign-in-alt"></i>
+        </button>
+        <span *ngIf="username" style="margin-right:10px;">Welcome, {{ username }}</span>
+        <button *ngIf="username" class="btn btn-warning" [routerLink]="['']" (click)="processLogout()" style="margin-right:10px;">
+        Logout  <i class="fas fa-sign-out-alt"></i>
+        </button>
+        <button class="btn btn-primary" [routerLink]="['/post']" >
+        Post  <i class="fas fa-plus-circle"></i>
+        </button> 
+    </div>
+</div>
+
+<div *ngFor="let n of news" class = "row news-item mx-auto" >
+    <div class="row">
+        <span class="news-timestamp"> {{ n.timestamp | date:'EE, d MMMM y, HH:mm' }}</span>
+    </div>
+    <div class="row">
+        <img [src] = "n.image" class = "news-image">
+    </div>
+    <div class="row">
+        <span class="news-title">{{ n.title }} </span>
+    </div>
+    <div class="row">
+        <span>{{ n.comments }} </span>
+    </div>
+    <div class="row" style="margin-bottom:15px;">
+        <span>by <span class="news-creator">{{ n.createdby }} </span></span>
+    </div>
+    
+
+</div>
+ 
+ 

@@ -1,0 +1,31 @@
+.news-item {
+    padding: 2px;
+    margin: 10px;
+    border: 2px solid darkslateblue;
+    text-align: center;
+    width:80%;
+}
+
+.news-timestamp {
+    text-align: right; 
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+.news-image {
+    width:400px;
+    margin-left:auto; 
+    margin-right:auto;
+    margin-top: 10px; 
+    margin-bottom: 10px;
+}
+
+.news-title {
+    font-weight: bold; 
+    font-size: 140%;
+}
+
+.news-creator {
+    font-style:italic;
+    color: darkslateblue;
+}
