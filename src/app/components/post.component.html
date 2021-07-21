@@ -15,6 +15,8 @@
                 Upload <i class="fas fa-upload"></i></button><br><br>-->
             <button class="btn btn-danger" [routerLink]="['/capture']">
                 Capture  <i class="fas fa-camera"></i></button>
+                <br>
+            <span *ngIf="!webcamImage" style ="color:blue; text-align: right;">Please snap a photo!</span>
 
         </div>
         
@@ -22,17 +24,17 @@
    
     <form [formGroup]="form" (ngSubmit)="processForm()"> 
         <div class="form-group mb-3">
-            <label for="title" class="form-label" style="font-weight: bold; font-size: 120%;">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Title" formControlName="post_title">
+            <label for="title" class="form-label" style="font-weight: bold; font-size: 120%;">Title*</label>
+            <input type="text" class="form-control" id="title" placeholder="Required" formControlName="post_title" required>
         </div>
         <div class="form-group mb-3">
-            <label for="comments" class="form-label" style="font-weight: bold; font-size: 120%;">Comments</label>
-            <textarea class="form-control" id="comments" rows="3" placeholder="Your thoughts" formControlName="comments"></textarea>
+            <label for="comments" class="form-label" style="font-weight: bold; font-size: 120%;">Comments*</label>
+            <textarea class="form-control" id="comments" rows="3" placeholder="Required" formControlName="comments" required></textarea>
         </div>
         <div class="mx-2 row">
             <div class="col text-center">
                 <button class="btn btn-primary" type="submit" style="width:100px;" 
-                    [disabled]="form.invalid ? true : !webcamImage">Post <i class="fas fa-share-square"></i></button>
+                [disabled]="form.invalid ? true : !webcamImage">Post <i class="fas fa-share-square"></i></button>
             </div>
             <div class="col text-center">
                 <button class="btn btn-warning" type="button" style="width:100px;" 
