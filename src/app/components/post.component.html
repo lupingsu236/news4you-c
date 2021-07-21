@@ -16,7 +16,7 @@
             <button class="btn btn-danger" [routerLink]="['/capture']">
                 Capture  <i class="fas fa-camera"></i></button>
                 <br>
-            <span *ngIf="!webcamImage" style ="color:blue; text-align: right;">Please snap a photo!</span>
+            <span *ngIf="errorMsg_image" style ="color:red; text-align: right;"> {{errorMsg_image}}</span>
 
         </div>
         
@@ -26,15 +26,19 @@
         <div class="form-group mb-3">
             <label for="title" class="form-label" style="font-weight: bold; font-size: 120%;">Title*</label>
             <input type="text" class="form-control" id="title" placeholder="Required" formControlName="post_title" required>
+            <span *ngIf="errorMsg_title" style="color:red;"> {{errorMsg_title}}</span>
         </div>
         <div class="form-group mb-3">
             <label for="comments" class="form-label" style="font-weight: bold; font-size: 120%;">Comments*</label>
             <textarea class="form-control" id="comments" rows="3" placeholder="Required" formControlName="comments" required></textarea>
+            <span *ngIf="errorMsg_comments" style="color:red;"> {{errorMsg_comments}}</span>
         </div>
         <div class="mx-2 row">
             <div class="col text-center">
-                <button class="btn btn-primary" type="submit" style="width:100px;" 
-                [disabled]="form.invalid ? true : !webcamImage">Post <i class="fas fa-share-square"></i></button>
+                <button class="btn btn-primary" type="submit" style="width:100px;"> 
+                    Post <i class="fas fa-share-square"></i></button>
+                <!--[disabled]="form.invalid ? true : !webcamImage"-->
+               
             </div>
             <div class="col text-center">
                 <button class="btn btn-warning" type="button" style="width:100px;" 

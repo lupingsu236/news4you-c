@@ -19,8 +19,9 @@ export class PostComponent implements OnInit, OnDestroy {
   webcamImage: WebcamImage = null; 
   subscription: Subscription;
   form: FormGroup;
-  post_title: string = null; 
-  comments: string = null;
+  errorMsg_title: string = null;
+  errorMsg_comments: string = null;
+  errorMsg_image: string = null;
 
   constructor(private fb: FormBuilder, private router: Router,
     private newsSvc: NewsService, private postSvc: PostService, private userSvc: UserService) { }
@@ -29,8 +30,8 @@ export class PostComponent implements OnInit, OnDestroy {
     this.subscription = this.postSvc.currentImage.subscribe(image => this.webcamImage = image);
     
     this.form = this.postSvc.getFormData()? this.postSvc.getFormData() : this.fb.group({
-      post_title: this.fb.control(this.post_title, [Validators.required]), 
-      comments: this.fb.control(this.comments, [Validators.required])
+      post_title: this.fb.control("", [Validators.required]), 
+      comments: this.fb.control("", [Validators.required])
     })
   }
 
@@ -50,26 +51,35 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   processForm() {
-    console.info('form details', this.form.value);
-    let post: News = {
-      title: this.form.value.post_title, 
-      comments: this.form.value.comments, 
-      image: this.webcamImage.imageAsDataUrl, 
-      createdby: this.userSvc.getUsername() 
-    };
-    this.newsSvc.createNews(post)
-        .then(() => {
-          this.clearFormAndImage();
-          this.router.navigate(['']);
-        })
-        .catch(error => {
-          if(error.status == 401) {
-            console.error("Unauthorised, please login");
-          } 
-          else if(error.status == 500) {
-            console.error("Server error");
-          }
-        });
+    //check if any field is null/empty
+    if(this.form.value.post_title.trim()!="" && this.form.value.comments!= "" && this.webcamImage != null) {
+      let post: News = {
+        title: this.form.value.post_title, 
+        comments: this.form.value.comments, 
+        image: this.webcamImage.imageAsDataUrl, 
+        createdby: this.userSvc.getUsername() 
+      };
+      this.newsSvc.createNews(post)
+          .then(() => {
+            this.clearFormAndImage();
+            this.router.navigate(['']);
+          })
+          .catch(error => {
+            if(error.status == 401) {
+              console.error("Unauthorised, please login");
+            } 
+            else if(error.status == 500) {
+              console.error("Server error");
+            }
+          });
+    }
+    else {
+        this.errorMsg_title = 
+          this.form.value.post_title == null || this.form.value.post_title.trim()==""? "Please enter title!": null;
+        this.errorMsg_comments = 
+          this.form.value.comments == null || this.form.value.comments.trim()==""? "Please enter comments!": null;
+        this.errorMsg_image = this.webcamImage == null? "Please snap a photo!": null;
+    }
   }
 
 

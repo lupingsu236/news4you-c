@@ -58,13 +58,13 @@ export class CameraComponent implements OnInit {
   }
 
   public handleImage(webcamImage: WebcamImage): void {
-    console.info('received webcam image', webcamImage);
+    //console.info('received webcam image', webcamImage);
     this.postSvc.updateImage(webcamImage);
     this.router.navigate(['/post']);
   }
 
   public cameraWasSwitched(deviceId: string): void {
-    console.log('active device: ' + deviceId);
+    //console.log('active device: ' + deviceId);
     this.deviceId = deviceId;
   }
 

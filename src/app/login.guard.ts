@@ -11,7 +11,6 @@ export class LoginGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot ): true|UrlTree {
       const url: string = state.url;
-      console.info(this.userSvc.getUsername());
       if(this.userSvc.getUsername()!=null) {
         return true;
       } 

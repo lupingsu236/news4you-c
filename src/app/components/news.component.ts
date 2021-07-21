@@ -28,7 +28,7 @@ export class NewsComponent implements OnInit {
     //call getNews and assign to this.news
     this.newsSvc.getNews()
         .then(result => {
-          console.info('news: ', result);
+          //console.info('news: ', result);
           this.news = result;
         })
         .catch(error => console.error(error.message));

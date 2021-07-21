@@ -21,7 +21,6 @@ export class AppComponent{
   }
 
   returnHome() {
-    console.info("path",window.location.pathname);
     if(window.location.pathname!="") {
       this.router.navigate(['']);
     }
